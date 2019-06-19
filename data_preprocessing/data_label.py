@@ -28,6 +28,6 @@ big_accusations = data_transform_big.extraction['accusation']
 # print(big_accusations)
 #[['故意伤害'], ['故意伤害'], ['故意伤害'], ['故意伤害'], ['故意伤害'], ['故意伤害'], ['故意伤害'], ['故意伤害'], ['故意伤害'], ['故意伤害'], ['妨害公务', '故意伤害', '盗窃']]
 data_transform_big.creat_label_set(name='accusation')
-big_labels = data_transform_big.creat_labels(name='accusation')#  案件个数*202
+labels = data_transform_big.creat_labels(name='accusation')#  案件个数*202
 # print(len(big_labels),len(big_labels[0]),big_labels[0])
-np.save('./data_deal/data_model_use/labels/' + original_dataname + '_labels_accusation.npy', big_labels)#形状  案件个数 *  202
+np.save('./data_deal/data_model_use/labels/' + original_dataname + '_labels_accusation.npy', labels)#形状  案件个数 *  202
