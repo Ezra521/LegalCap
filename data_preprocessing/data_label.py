@@ -16,7 +16,7 @@ original_dataname = "data_train"
 
 
 ########################################################################################
-# big数据集处理
+# 数据集处理
 data_transform = data_transform()
 
 # 读取json文件
@@ -24,8 +24,8 @@ data_transform.read_data(path="./data_original/"+ original_dataname +".json")
 
 # 创建数据one-hot标签
 data_transform.extract_data(name='accusation')
-data_transform.extraction['accusation']
-# print(big_accusations)
+# data_transform.extraction['accusation']
+# print(data_transform.extraction['accusation'])
 #[['故意伤害'], ['故意伤害'], ['故意伤害'], ['故意伤害'], ['故意伤害'], ['故意伤害'], ['故意伤害'], ['故意伤害'], ['故意伤害'], ['故意伤害'], ['妨害公务', '故意伤害', '盗窃']]
 data_transform.creat_label_set(name='accusation')
 labels = data_transform.creat_labels(name='accusation')#  案件个数*202

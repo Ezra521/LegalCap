@@ -1,9 +1,9 @@
 import numpy as np
 
 
-addindex = np.load('../data_preprocessing/data_deal/index_add_accusation_2000_10.npy')
-fact = np.load('../data_preprocessing/data_deal/fact_pad_seq/big_fact_pad_seq_80000_400.npy')
-label = np.load('../data_preprocessing/data_deal/labels/big_labels_accusation.npy')
+addindex = np.load('./enhanced_index/data_enhanced_index.npy')
+fact = np.load('../data_preprocessing/data_deal/data_model_use/fact/data_train_fact_pad_seq_80000_400.npy')
+label = np.load('../data_preprocessing/data_deal/data_model_use/labels/data_train_labels_accusation.npy')
 
 # addfact = fact + fact[addindex]
 addfact = np.append(fact,fact[addindex],axis=0)
@@ -14,5 +14,5 @@ print(len(label))
 print(len(addfact),addfact,type(addfact))
 print(len(addlabel),addlabel,type(addlabel))
 
-np.save("../data_preprocessing/data_deal/fact_pad_seq/add_big_fact_pad_seq_80000_400.npy",addfact)
-np.save('../data_preprocessing/data_deal/labels/add_big_labels_accusation.npy',addlabel)
+np.save("./enhanced_data/enhanced_data_train_fact_pad_seq_80000_400.npy",addfact)
+np.save('./enhanced_data/enhanced_data_train_labels_accusation.npy',addlabel)

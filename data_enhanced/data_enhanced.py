@@ -1,64 +1,53 @@
-import json
+import sys
 import numpy as np
 import pandas as pd
-from sklearn.model_selection import train_test_split
-from collections import defaultdict
+sys.path.append("..")#让sys目录变成父节点
+from data_preprocessing.data_transform import  data_transform
 
-# 罪名数量分布
-labels = np.load('../data_preprocessing/data_deal/labels/big_labels_accusation.npy')
-x = labels.sum(axis=1)
-for i in range(int(x.max()) + 1):
-    # s1 = (x==i)
-    # print('罪名数=%d的有%d个' % (i, s1.sum()))
-    print('罪名数=%d的有%d个' % (i, (x == i).sum()))
-    #一个案件共有几个罪名的统计  列出来
-######################################################################################################
-# 不平衡修正，记录少类别的索引
-path = '../data_preprocessing/data/data_all.json'
-f = open(path, 'r', encoding='utf8')
-line = True
-data = []
-n = 0
-while line:
-    line = f.readline()
-    try:
-        data.append(json.loads(line))
-    except Exception as e:
-        print('num: %d' % n)
-        print('error: %s' % e)
-        print('data: %s' % line)
-        print(n)
-    n += 1
-    if n % 200000 == 0:
-        print('finish read %d lines' % n)
 
-data_train, data_test = train_test_split(data, test_size=0.05, random_state=1)
 
+def show_datanum_distribution():
+    # 罪名数量分布
+    labels = np.load('../data_preprocessing/data_deal/data_model_use/labels/data_all_labels_accusation.npy')
+    x = labels.sum(axis=1)
+    for i in range(int(x.max()) + 1):
+        # s1 = (x==i)
+        # print('罪名数=%d的有%d个' % (i, s1.sum()))
+        print('罪名数=%d的有%d个' % (i, (x == i).sum()))
+        #一个案件共有几个罪名的统计  列出来
+
+# show_datanum_distribution()
+
+original_dataname = "data_train"
+data_transform = data_transform()
+
+data_transform.read_data(path="../data_preprocessing/data_original/"+ original_dataname +".json")
+data_transform.extract_data(name='accusation')
+datalabel = data_transform.extraction['accusation']
 
 class_name = []
 class_index = []
 
-for n, i in enumerate(data):
-# for n, i in enumerate(data_train):
+for n, i in enumerate(datalabel):
     # 只取罪名只有一个的样本  然后 获取罪名 和索引 索引就是第几个
-    if len(i['meta']['accusation']) == 1:
-        class_name.append(i['meta']['accusation'][0])
+    if len(i) == 1:
+        class_name.append(i[0])
         class_index.append(n)
 
 # 把罪名变成array数组
 class_name_array = np.array(class_name)
 # 把索引变成array数组
 class_index_array = np.array(class_index)
-np.save('../data_preprocessing/data_deal/class/name_accusation.npy', class_name_array)#  只取了一个罪名的样本["故意伤害","故意伤害",""......]
-np.save('../data_preprocessing/data_deal/class/index_accusation.npy', class_index_array)# 刚才样本在原始数据对应的索引
+# np.save('../data_preprocessing/data_deal/class/name_accusation.npy', class_name_array)#  只取了一个罪名的样本["故意伤害","故意伤害",""......]
+# np.save('../data_preprocessing/data_deal/class/index_accusation.npy', class_index_array)# 刚才样本在原始数据对应的索引
 
 maxcount = 2000
 num = 10
 accusation_set = list(set(class_name))#去除class_name中的多余项  比如11条数据 就只剩下 [妨碍公务 故意伤害] 因为set是创一个无序不重复的元素集合
-print("accusation的长度",len(accusation_set))
-index_add = []
-m = 0
+print("所有罪名的个数：",len(accusation_set))
 
+index_add = []#数据增加的索引
+m = 0
 count = []
 csv = {"label":[], "num":[]}
 for i in accusation_set:
@@ -79,7 +68,7 @@ print(csv)
 df =pd.DataFrame(csv)
 df.to_csv("labelcount.csv",index=False, encoding="utf_8_sig",header=True)
 
-np.save('../data_preprocessing/data_deal/index_add_accusation_%d_%d.npy' % (maxcount, num), np.array(index_add))
+np.save('./enhanced_index/data_enhanced_index.npy' , np.array(index_add))
 
 '''
 ['盗窃']	363225
