@@ -13,6 +13,8 @@ print('start', time.strftime('%Y-%m-%d %H:%M:%S', time.localtime()))
 
 num_words = 80000 #字典的个数
 maxlen = 400 #每一个输入样本的长度
+
+
 kernel_size = 3
 DIM = 512  #词向量的维度
 batch_size = 256
@@ -24,15 +26,26 @@ result_list=[]
 
 # print('num_words = 80000, maxlen = 400 ')
 
-# fact数据集
-fact = np.load('./data_preprocessing/data_deal/fact_pad_seq/big_fact_pad_seq_%d_%d.npy' % (num_words, maxlen))
-fact_train, fact_test = train_test_split(fact, test_size=0.05, random_state=1)
-del fact
+# # fact数据集
+# fact = np.load('./data_preprocessing/data_deal/fact_pad_seq/big_fact_pad_seq_%d_%d.npy' % (num_words, maxlen))
+# fact_train, fact_test = train_test_split(fact, test_size=0.05, random_state=1)
+# del fact
+#
+# # 标签数据集
+# labels = np.load('./data_preprocessing/data_deal/labels/big_labels_accusation.npy')
+# labels_train, labels_test = train_test_split(labels, test_size=0.05, random_state=1)
+# del labels
 
-# 标签数据集
-labels = np.load('./data_preprocessing/data_deal/labels/big_labels_accusation.npy')
-labels_train, labels_test = train_test_split(labels, test_size=0.05, random_state=1)
-del labels
+fact_train =np.load('./data_preprocessing/data_deal/data_model_use/fact/data_train_fact_pad_seq_80000_400.npy')
+fact_test =np.load('./data_preprocessing/data_deal/data_model_use/fact/data_test_fact_pad_seq_80000_400.npy')
+fact_valid =np.load('./data_preprocessing/data_deal/data_model_use/fact/data_valid_fact_pad_seq_80000_400.npy')
+
+
+labels_train =np.load('./data_preprocessing/data_deal/data_model_use/labels/data_train_labels_accusation.npy')
+labels_test =np.load('./data_preprocessing/data_deal/data_model_use/labels/data_test_labels_accusation.npy')
+labels_valid =np.load('./data_preprocessing/data_deal/data_model_use/labels/data_valid_labels_accusation.npy')
+
+
 
 def get_model():
     data_input = Input(shape=[fact_train.shape[1]])
@@ -59,9 +72,9 @@ def get_model():
 if __name__ == "__main__":
     model = get_model()
     for i in range(n_start, n_end):
-        model.fit(x=fact_train, y=labels_train, batch_size=batch_size, epochs=1, verbose=1)
+        model.fit(x=fact_train, y=labels_train, batch_size=batch_size,validation_data=(fact_valid,labels_valid), epochs=1, verbose=1)
         # model.fit(x=fact_test, y=labels_test, batch_size=batch_size, epochs=1, verbose=1)
-        model.save('./kerasmodel/%d_%d/CNN/Capsule_epochs_%d.h5' % (num_words, maxlen, i))
+        model.save('./model_save/CNN_No_Enhanced/CNN_epochs_%d.h5' % i)
         y = model.predict(fact_test[:])
         print('第%s次迭代测试结果如下：' % i)
         #获取测试集结果
