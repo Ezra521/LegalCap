@@ -54,15 +54,9 @@ def get_model():
     x = LSTM(256,activation="sigmoid")(x)
     x = Dropout(0.5)(x)
     x = Dense(500, activation="relu")(x)
-    x = Dense(labels_train.shape[1], activation="sigmoid")(x)
+    x = Dense(labels_train.shape[1], activation="softmax")(x)
 
 
-    #
-    # x = Conv1D(filters=512, kernel_size=[kernel_size], strides=1, padding='same', activation='relu')(x)
-    # x = GlobalMaxPool1D()(x)
-    # x = BatchNormalization()(x)
-    # x = Dense(1000, activation="relu")(x)
-    # x = Dropout(0.2)(x)
     # x = Dense(labels_train.shape[1], activation="sigmoid")(x)
     model = Model(inputs=data_input, outputs=x)
     model.compile(loss='binary_crossentropy',
