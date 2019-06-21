@@ -55,7 +55,7 @@ def get_model():
     x = BatchNormalization()(x)
     x = Dense(1000, activation="relu")(x)
     x = Dropout(0.2)(x)
-    x = Dense(labels_train.shape[1], activation="sigmoid")(x)
+    x = Dense(labels_train.shape[1], activation="softmax")(x)
     model = Model(inputs=data_input, outputs=x)
     model.compile(loss='binary_crossentropy',
                   optimizer='adam',

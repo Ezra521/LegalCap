@@ -51,9 +51,9 @@ def get_model():
                          mask_zero=0,
                          name='Embedding')(data_input)
     x = word_vec
-    x = LSTM(256,activation="relu")(x)
-    x = Dropout(0.2)(x)
-    x = Dense(1000, activation="relu")(x)
+    x = LSTM(256,activation="sigmoid")(x)
+    x = Dropout(0.5)(x)
+    x = Dense(500, activation="relu")(x)
     x = Dense(labels_train.shape[1], activation="sigmoid")(x)
 
 
