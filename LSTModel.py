@@ -4,10 +4,9 @@ import numpy as np
 import pandas as pd
 from keras.models import Model
 from keras.layers.recurrent import LSTM
-from sklearn.model_selection import train_test_split
+# from sklearn.model_selection import train_test_split
 from keras.layers import Conv1D,GlobalMaxPool1D,BatchNormalization,Input,Embedding,Dense,Dropout,Activation
 from get_evaluate import get_evaluate
-#w
 
 # os.environ["CUDA_VISIBLE_DEVICES"] = "1"
 print('start', time.strftime('%Y-%m-%d %H:%M:%S', time.localtime()))
