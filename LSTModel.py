@@ -5,7 +5,7 @@ import pandas as pd
 from keras.models import Model
 from keras.layers.recurrent import LSTM
 from sklearn.model_selection import train_test_split
-from keras.layers import Conv1D,GlobalMaxPool1D,BatchNormalization,Input,Embedding,Dense,Dropout
+from keras.layers import Conv1D,GlobalMaxPool1D,BatchNormalization,Input,Embedding,Dense,Dropout,Activation
 from get_evaluate import get_evaluate
 
 
@@ -51,19 +51,13 @@ def get_model():
                          mask_zero=0,
                          name='Embedding')(data_input)
     x = word_vec
-    x = LSTM(256,activation="sigmoid")(x)
+    x = LSTM(64)(x)
+    x = Dense(256,name="FC1")(x)
+    x = Activation("relu")(x)
     x = Dropout(0.5)(x)
-    x = Dense(500, activation="relu")(x)
-    x = Dense(labels_train.shape[1], activation="sigmoid")(x)
+    x = Dense(202,name="out_layer")(x)
+    x = Activation("softmax")(x)
 
-
-    #
-    # x = Conv1D(filters=512, kernel_size=[kernel_size], strides=1, padding='same', activation='relu')(x)
-    # x = GlobalMaxPool1D()(x)
-    # x = BatchNormalization()(x)
-    # x = Dense(1000, activation="relu")(x)
-    # x = Dropout(0.2)(x)
-    # x = Dense(labels_train.shape[1], activation="sigmoid")(x)
     model = Model(inputs=data_input, outputs=x)
     model.compile(loss='binary_crossentropy',
                   optimizer='adam',
