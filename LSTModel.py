@@ -7,7 +7,7 @@ from keras.layers.recurrent import LSTM
 from sklearn.model_selection import train_test_split
 from keras.layers import Conv1D,GlobalMaxPool1D,BatchNormalization,Input,Embedding,Dense,Dropout,Activation
 from get_evaluate import get_evaluate
-
+#w
 
 # os.environ["CUDA_VISIBLE_DEVICES"] = "1"
 print('start', time.strftime('%Y-%m-%d %H:%M:%S', time.localtime()))
@@ -19,7 +19,7 @@ maxlen = 400 #每一个输入样本的长度
 
 
 DIM = 300  #词向量的维度
-batch_size = 256
+batch_size = 128
 
 
 n_start = 1
@@ -50,8 +50,7 @@ def get_model():
                          mask_zero=0,
                          name='Embedding')(data_input)
     x = word_vec
-    # x = LSTM(256)(x)
-    x = LSTM(512)(x)
+    x = LSTM(256)(x)
     x = Dense(500,name="FC1")(x)
     x = Activation("relu")(x)
     x = Dropout(0.5)(x)
