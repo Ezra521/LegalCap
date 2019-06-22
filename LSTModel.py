@@ -19,7 +19,7 @@ maxlen = 400 #每一个输入样本的长度
 
 
 DIM = 300  #词向量的维度
-batch_size = 128
+batch_size = 256
 
 
 n_start = 1
@@ -50,7 +50,8 @@ def get_model():
                          mask_zero=0,
                          name='Embedding')(data_input)
     x = word_vec
-    x = LSTM(256)(x)
+    # x = LSTM(256)(x)
+    x = LSTM(512)(x)
     x = Dense(500,name="FC1")(x)
     x = Activation("relu")(x)
     x = Dropout(0.5)(x)
