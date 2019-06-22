@@ -17,7 +17,7 @@ isEnhanced = False
 num_words = 80000 #字典的个数
 maxlen = 400 #每一个输入样本的长度
 
-DIM = 300  #词向量的维度
+
 DIM = 300  #词向量的维度
 batch_size = 128
 
@@ -50,7 +50,7 @@ def get_model():
                          mask_zero=0,
                          name='Embedding')(data_input)
     x = word_vec
-    x = LSTM(128)(x)
+    x = LSTM(256)(x)
     x = Dense(500,name="FC1")(x)
     x = Activation("relu")(x)
     x = Dropout(0.5)(x)
