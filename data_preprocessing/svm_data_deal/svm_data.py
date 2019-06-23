@@ -8,7 +8,7 @@ import thulac
 
 dim = 5000
 
-original_dataname = "data_train"
+original_dataname = "test"
 
 def cut_text(alltext):
     count = 0
@@ -41,9 +41,10 @@ alltext,accu_label = read_trainData("../data_original/"+original_dataname+".json
 print('cut text...')
 train_data = cut_text(alltext)
 
-with open('./fact_cut/'+original_dataname+'_fact_cut_%d_%d.pkl',)
+with open('./data_cut_for_svm/'+original_dataname+'_fact_cut_%d.pkl'%len(alltext),mode='wb') as f:
+    pickle.dump(train_data,f)
+with open('./data_cut_for_svm/'+original_dataname+'_label_%d.pkl'%len(alltext),mode='wb') as f:
+    pickle.dump(accu_label,f)
 
 
-print('train tfidf...')
-tfidf = train_tfidf(train_data)
-train_data = cut_text(alltext)
+print("finish data cut")
