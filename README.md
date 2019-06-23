@@ -13,5 +13,5 @@
 + f1_micro: 0.7997723637258521 
 + f1_macro: 0.6444262529218608
 ##### svm rsult with enhanced
-+ f1_micro: 
-+ f1_macro: 
++ f1_micro: 0.7930047988187523 
++ f1_macro: 0.6732366823844439
