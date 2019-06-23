@@ -6,8 +6,16 @@ from sklearn.externals import joblib
 import pickle
 import thulac
 
-original_dataname = "data_train"
+original_dataname = "test"
 dim = 5000
+
+
+
+with open('.data_preprocessing/svm_data_deal/data_cut_for_svm/'+original_dataname+'_fact_cut_11.pkl'%len(alltext),mode='wb') as f:
+    traindata = pickle.load(f)
+with open('.data_preprocessing/svm_data_deal/data_cut_for_svm/'+original_dataname+'_label_%d.pkl'%len(alltext),mode='wb') as f:
+    pickle.load(f)
+
 
 
 
