@@ -14,8 +14,14 @@ with open('./data_cut_for_svm/data_train_label.pkl',
 print(len(train_data))
 for i in addindex:
     train_data.append(train_data[int(i)])
+    train_label.append(train_label[int(i)])
 
 print(len(train_data))
+
 with open('./svm_enhanced_data/enhanced_data_train_fact_cut.pkl',
           mode='wb') as f:
     pickle.dump(train_data,f)
+
+with open('./svm_enhanced_data/enhanced_data_train_label.pkl',
+          mode='wb') as f:
+    pickle.dump(train_label,f)
