@@ -22,7 +22,7 @@ def train_tfidf(train_data):
     return tfidf
 
 def train_SVC(vec, label):
-    print(type(vec),type(label))
+    # print(type(vec),type(label))
     SVC = LinearSVC()
     SVC.fit(vec, label)
     return SVC
@@ -36,16 +36,16 @@ def saveModel():
         with open('./data_preprocessing/svm_data_deal/svm_enhanced_data/enhanced_data_train_label.pkl',
                   mode='rb') as f:
             train_label = pickle.load(f)
-        print('train tfidf...')
+        print('train tfidf... with enhanced')
         tfidf = train_tfidf(train_data)
         vec = tfidf.transform(train_data)
         # vecarray = vec.toarray()
-        print('train SVC')
+        print('train SVC with enhanced')
         svm = train_SVC(vec, train_label)
 
         joblib.dump(tfidf, './model_save/TFIDFSVM_Enhanced/tfidf_no_enhanced.model')
         joblib.dump(svm, './model_save/TFIDFSVM_Enhanced/svm_no_enhanced.model')
-        print("finsh svc training")
+        print("finsh svc training with enhanced")
     else:
         with open('./data_preprocessing/svm_data_deal/data_cut_for_svm/data_train_fact_cut.pkl',
                   mode='rb') as f:

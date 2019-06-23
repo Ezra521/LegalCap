@@ -9,6 +9,9 @@
 2. 深度学习的数据增强在data_preprocessing文件夹里面，其中(data_enhanced.py)是生成数据增强的索引，索引放在了enhanced_index文件夹里面的，addfact.py是具体的使用索引把数据扩增结果放在了enhanced_data文件夹里面的，svm的数据增强
 
 
-##### svm rsult
+##### svm rsult with out enhanced
 + f1_micro: 0.7997723637258521 
 + f1_macro: 0.6444262529218608
+##### svm rsult with enhanced
++ f1_micro: 
++ f1_macro: 
