@@ -3,7 +3,7 @@ from sklearn.svm import LinearSVC
 from sklearn.externals import joblib
 import pickle
 
-original_dataname = "test"
+original_dataname = "data_train"
 dim = 5000
 
 def train_tfidf(train_data):
@@ -38,5 +38,9 @@ if __name__ == "__main__":
     vec = tfidf.transform(train_data)
     # vecarray = vec.toarray()
     print('accu SVC')
-    accu = train_SVC(vec, train_label)
-    joblib.dump(accu, './model_save/TFIDFSVM_No_Enhanced/svm.model')
+    svm = train_SVC(vec, train_label)
+    joblib.dump(tfidf, './model_save/TFIDFSVM_No_Enhanced/tfidf_no_enhanced.model')
+    joblib.dump(svm, './model_save/TFIDFSVM_No_Enhanced/svm_no_enhanced.model')
+
+
+    # y = accu.predict(vec)

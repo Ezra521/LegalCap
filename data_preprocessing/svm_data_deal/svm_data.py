@@ -6,9 +6,7 @@ from sklearn.externals import joblib
 import pickle
 import thulac
 
-dim = 5000
-
-original_dataname = "test"
+original_dataname = "data_test"
 
 def cut_text(alltext):
     count = 0
