@@ -1,10 +1,7 @@
 from sklearn.feature_extraction.text import TfidfVectorizer as TFIDF
-import json
-# from predictor import data
 from sklearn.svm import LinearSVC
 from sklearn.externals import joblib
 import pickle
-import thulac
 
 original_dataname = "test"
 dim = 5000
@@ -22,9 +19,10 @@ def train_tfidf(train_data):
     return tfidf
 
 def train_SVC(vec, label):
-	SVC = LinearSVC()
-	SVC.fit(vec, label)
-	return SVC
+    print(type(vec),type(label))
+    SVC = LinearSVC()
+    SVC.fit(vec, label)
+    return SVC
 
 
 if __name__ == "__main__":
@@ -38,7 +36,7 @@ if __name__ == "__main__":
     print('train tfidf...')
     tfidf = train_tfidf(train_data)
     vec = tfidf.transform(train_data)
+    # vecarray = vec.toarray()
     print('accu SVC')
     accu = train_SVC(vec, train_label)
     joblib.dump(accu, './model_save/TFIDFSVM_No_Enhanced/svm.model')
-    # alltext =
