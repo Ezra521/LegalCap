@@ -1,9 +1,10 @@
 from sklearn.feature_extraction.text import TfidfVectorizer as TFIDF
 from sklearn.svm import LinearSVC
 from sklearn.externals import joblib
+from sklearn.metrics.scorer import f1_score,recall_score,precision_score
 import pickle
 
-original_dataname = "test"
+original_dataname = "data_test"
 dim = 5000
 
 def train_tfidf(train_data):
@@ -43,7 +44,10 @@ def saveModel():
     joblib.dump(svm, './model_save/TFIDFSVM_No_Enhanced/svm_no_enhanced.model')
     print("finsh svc training")
 
-
+def getresult(y_pred,test_label):
+    f1_micro = f1_score(y_pred=y_pred, y_true=test_label, pos_label=1, average='micro')
+    f1_macro = f1_score(y_pred=y_pred, y_true=test_label, pos_label=1, average='macro')
+    return (f1_micro,f1_macro)
 
 if __name__ == "__main__":
     # saveModel()
@@ -57,5 +61,10 @@ if __name__ == "__main__":
         test_label = pickle.load(f)
     vec = tfidf.transform(test_data)
 
-    y = svm.predict(vec)
-    print(y)
+    y_pred = svm.predict(vec)
+
+    f1_micro,f1_macro = getresult(y_pred,test_label)
+
+    # print("test_label",test_label)
+    # print("y_pred",y_pred)
+    print("f1_micro:",f1_micro,"\nf1_macro:",f1_macro)
