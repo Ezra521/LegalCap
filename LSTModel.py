@@ -50,7 +50,7 @@ def get_model():
                          name='Embedding')(data_input)
     x = word_vec
     x = LSTM(512)(x)
-    x = Dense(500,name="FC1")(x)
+    x = Dense(1000,name="FC1")(x)
     x = Activation("relu")(x)
     x = Dropout(0.5)(x)
     x = Dense(202,name="out_layer")(x)
