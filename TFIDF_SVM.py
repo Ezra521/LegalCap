@@ -32,4 +32,3 @@ def readdata():
     return fact_cut
 if __name__ == "__main__":
     print("reading data...")
-    alltext =
