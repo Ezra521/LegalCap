@@ -1,22 +1,49 @@
-import sys
+from sklearn.feature_extraction.text import TfidfVectorizer as TFIDF
+import json
+import data
+from sklearn.svm import LinearSVC
+from sklearn.externals import joblib
 import pickle
-sys.path.append("..")#让sys目录变成父节点
-from data_preprocessing.data_transform import  data_transform
+import thulac
 
-
+dim = 5000
 
 original_dataname = "data_train"
-data_transform = data_transform()
 
-# 读取json文件,1710857行
-data_transform.read_data(path="../data_original/"+ original_dataname +".json")
+def cut_text(alltext):
+    count = 0
+    cut = thulac.thulac(seg_only=True)
+    train_text = []
+    for text in alltext:
+        count += 1
+        if count % 2000 == 0:
+            print(count)
+        train_text.append(cut.cut(text, text=True))
 
-data_transform.extract_data(name='fact')
+    return train_text
 
-originaldatanum = len(data_transform.extraction["fact"])
 
-texts = data_transform.extraction['fact'][:]
-fact_cut = data_transform.cut_texts(texts=texts, word_len=1, need_cut=True)
-with open('./fact_cut/' + original_dataname + 'num_%d.pkl'% originaldatanum, mode='wb') as f:
-    pickle.dump(fact_cut,f)
-print("finish %d sample"%originaldatanum)
+def read_trainData(path):
+    fin = open(path, 'r', encoding='utf8')
+    alltext = []
+    accu_label = []
+    line = fin.readline()
+    while line:
+        d = json.loads(line)
+        alltext.append(d['fact'])
+        accu_label.append(data.getlabel(d))
+        line = fin.readline()
+    fin.close()
+    return alltext, accu_label
+
+print("reading ...")
+alltext,accu_label = read_trainData("../data_original/"+original_dataname+".json")
+print('cut text...')
+train_data = cut_text(alltext)
+
+with open('./fact_cut/'+original_dataname+'_fact_cut_%d_%d.pkl',)
+
+
+print('train tfidf...')
+tfidf = train_tfidf(train_data)
+train_data = cut_text(alltext)
