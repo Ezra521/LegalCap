@@ -9,16 +9,6 @@ import thulac
 original_dataname = "test"
 dim = 5000
 
-
-
-with open('.data_preprocessing/svm_data_deal/data_cut_for_svm/'+original_dataname+'_fact_cut_11.pkl'%len(alltext),mode='wb') as f:
-    traindata = pickle.load(f)
-with open('.data_preprocessing/svm_data_deal/data_cut_for_svm/'+original_dataname+'_label_%d.pkl'%len(alltext),mode='wb') as f:
-    pickle.load(f)
-
-
-
-
 def train_tfidf(train_data):
     tfidf = TFIDF(
         min_df=5,
@@ -36,10 +26,19 @@ def train_SVC(vec, label):
 	SVC.fit(vec, label)
 	return SVC
 
-def readdata():
-    with open('./data_deal/data_cut/' + original_dataname + '_fact_cut_0_100000.pkl', mode='rb') as f:
-        fact_cut = pickle.load(f)
-    return fact_cut
+
 if __name__ == "__main__":
     print("reading data...")
+
+    with open('./data_preprocessing/svm_data_deal/data_cut_for_svm/' + original_dataname + '_fact_cut.pkl',
+              mode='rb') as f:
+        train_data = pickle.load(f)
+    with open('./data_preprocessing/svm_data_deal/data_cut_for_svm/' + original_dataname + '_label.pkl', mode='rb') as f:
+        train_label = pickle.load(f)
+    print('train tfidf...')
+    tfidf = train_tfidf(train_data)
+    vec = tfidf.transform(train_data)
+    print('accu SVC')
+    accu = train_SVC(vec, train_label)
+    joblib.dump(accu, './model_save/TFIDFSVM_No_Enhanced/svm.model')
     # alltext =
