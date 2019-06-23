@@ -9,6 +9,8 @@ import thulac
 original_dataname = "data_train"
 dim = 5000
 
+
+
 def train_tfidf(train_data):
     tfidf = TFIDF(
         min_df=5,
@@ -32,3 +34,4 @@ def readdata():
     return fact_cut
 if __name__ == "__main__":
     print("reading data...")
+    # alltext =
