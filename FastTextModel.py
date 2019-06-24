@@ -6,7 +6,7 @@ from keras.models import Model
 from keras.backend import concatenate
 # from keras.layers import Input,Embedding,Dense,Dropout,Convolution1D,MaxPool1D,Flatten
 from get_evaluate import get_evaluate
-from keras.layers import Conv1D, BatchNormalization, Activation, GlobalMaxPool1D,Embedding,Input,Dense,Concatenate, Dropout
+from keras.layers import Conv1D, BatchNormalization, Activation, GlobalMaxPool1D,Embedding,Input,GlobalAveragePooling1D,Dense
 
 # os.environ["CUDA_VISIBLE_DEVICES"] = "1"
 print('start', time.strftime('%Y-%m-%d %H:%M:%S', time.localtime()))
@@ -40,15 +40,6 @@ labels_test =np.load('./data_preprocessing/data_deal/data_model_use/labels/data_
 fact_valid =np.load('./data_preprocessing/data_deal/data_model_use/fact/data_valid_fact_pad_seq_80000_400.npy')
 labels_valid =np.load('./data_preprocessing/data_deal/data_model_use/labels/data_valid_labels_accusation.npy')
 
-def textcnn_one(word_vec=None, kernel_size=1, filters=512):
-    x = word_vec
-    x = Conv1D(filters=filters, kernel_size=[kernel_size], strides=1, padding='same')(x)
-    x = BatchNormalization()(x)
-    x = Activation(activation='relu')(x)
-    x = Conv1D(filters=filters, kernel_size=[kernel_size], strides=1, padding='same')(x)
-    x = BatchNormalization()(x)
-    x = Activation(activation='relu')(x)
-    x = GlobalMaxPool1D()(x)
 
 def get_model():
     data_input = Input(shape=[fact_train.shape[1]])
@@ -57,7 +48,8 @@ def get_model():
                          output_dim=DIM,
                          mask_zero=0,
                          name='Embedding')(data_input)
-
+    x = GlobalAveragePooling1D()(word_vec)
+    x = Dense(202, activation='softmax')(x)
 
     model = Model(inputs=data_input, outputs=x)
     model.compile(loss='binary_crossentropy',
@@ -73,9 +65,9 @@ if __name__ == "__main__":
         model.fit(x=fact_train, y=labels_train, batch_size=batch_size,validation_data=(fact_valid,labels_valid), epochs=1, verbose=1)
         # model.fit(x=fact_test, y=labels_test, batch_size=batch_size, epochs=1, verbose=1)
         if isEnhanced:
-            model.save('./model_save/TextCNN_Enhanced/TextCNN_epochs_%d.h5' % i)
+            model.save('./model_save/TextCNN_Enhanced/FastText_epochs_%d.h5' % i)
         else:
-            model.save('./model_save/TextCNN_No_Enhanced/TextCNN_epochs_%d.h5' % i)
+            model.save('./model_save/TextCNN_No_Enhanced/FastText_epochs_%d.h5' % i)
         y = model.predict(fact_test[:])
         print('第%s次迭代测试结果如下：' % i)
         #获取测试集结果
@@ -86,8 +78,8 @@ if __name__ == "__main__":
     df =pd.DataFrame(result_list,columns=["accu", "pre_micro", "recall_micro", "f1_micro","pre_macro","recall_macro","f1_macro"])
     nowtime = time.strftime("%Y%m%d%H%M%S", time.localtime())
     if isEnhanced:
-        df.to_csv("./model_save/result_csv/enhanced_TextCNN"+ nowtime + ".csv", index=True, encoding="utf_8_sig", mode="a", header=True)
+        df.to_csv("./model_save/result_csv/enhanced_FastText"+ nowtime + ".csv", index=True, encoding="utf_8_sig", mode="a", header=True)
     else:
-        df.to_csv("./model_save/result_csv/no_enhanced_TextCNN"+ nowtime + ".csv", index=True, encoding="utf_8_sig", mode="a", header=True)
+        df.to_csv("./model_save/result_csv/no_enhanced_FastText"+ nowtime + ".csv", index=True, encoding="utf_8_sig", mode="a", header=True)
     print('end', time.strftime('%Y-%m-%d %H:%M:%S', time.localtime()))
     print('###################################################################################################################\n')
