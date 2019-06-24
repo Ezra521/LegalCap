@@ -15,21 +15,21 @@ print('start', time.strftime('%Y-%m-%d %H:%M:%S', time.localtime()))
 num_words = 80000 #字典的个数
 maxlen = 400 #每一个输入样本的长度
 kernel_size = 3
-DIM = 400  #词向量的维度
+DIM = 300  #词向量的维度
 batch_size = 256
 gru_len = 128
 Routings = 4
 Num_capsule = 32
 Dim_capsule = 32
-dropout_p = 0.1
+dropout_p = 0.5
 rate_drop_dense = 0.1
 
 n_start = 1
-n_end = 51
+n_end = 31
 result_list=[]
 
 
-isEnhanced = True
+isEnhanced = False
 
 if isEnhanced:
     fact_train = np.load('./data_enhanced/enhanced_data/enhanced_data_train_fact_pad_seq_80000_400.npy')

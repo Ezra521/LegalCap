@@ -4,8 +4,8 @@ from sklearn.externals import joblib
 from sklearn.metrics.scorer import f1_score,recall_score,precision_score
 import pickle
 
-original_dataname = "data_test"
-isEnhanced = True
+
+isEnhanced = False
 
 dim = 5000
 
