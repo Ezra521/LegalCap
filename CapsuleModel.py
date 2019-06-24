@@ -74,12 +74,10 @@ if __name__ == "__main__":
     model = get_model()
     for i in range(n_start, n_end):
         model.fit(x=fact_train, y=labels_train, batch_size=batch_size, epochs=1, verbose=1)
-        # model.fit(x=fact_test, y=labels_test, batch_size=batch_size, epochs=1, verbose=1)
-        model.save('./kerasmodel/%d_%d/Capsule/Capsule_epochs_%d_4route.h5' % (num_words, maxlen, i))
         if isEnhanced:
-            model.save('./model_save/Capsule_Enhanced/CNN_epochs_%d.h5' % i)
+            model.save('./model_save/Capsule_Enhanced/Capsule_epochs_%d.h5' % i)
         else:
-            model.save('./model_save/Capsule_No_Enhanced/CNN_epochs_%d.h5' % i)
+            model.save('./model_save/Capsule_No_Enhanced/Capsule_epochs_%d.h5' % i)
 
 
         y = model.predict(fact_test[:])

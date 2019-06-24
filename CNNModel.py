@@ -8,7 +8,6 @@ from keras.layers import Conv1D,GlobalMaxPool1D,BatchNormalization,Input,Embeddi
 from get_evaluate import get_evaluate
 
 
-# os.environ["CUDA_VISIBLE_DEVICES"] = "1"
 print('start', time.strftime('%Y-%m-%d %H:%M:%S', time.localtime()))
 
 isEnhanced = True
@@ -68,7 +67,6 @@ if __name__ == "__main__":
     model = get_model()
     for i in range(n_start, n_end):
         model.fit(x=fact_train, y=labels_train, batch_size=batch_size,validation_data=(fact_valid,labels_valid), epochs=1, verbose=1)
-        # model.fit(x=fact_test, y=labels_test, batch_size=batch_size, epochs=1, verbose=1)
         if isEnhanced:
             model.save('./model_save/CNN_Enhanced/CNN_epochs_%d.h5' % i)
         else:
