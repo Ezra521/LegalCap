@@ -18,7 +18,7 @@ maxlen = 400 #每一个输入样本的长度
 kernel_size = 3
 DIM = 512  #词向量的维度
 batch_size = 256
-filters = 256
+# filters = 256
 
 n_start = 1
 n_end = 11
