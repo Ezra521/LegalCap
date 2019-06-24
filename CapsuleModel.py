@@ -78,8 +78,6 @@ if __name__ == "__main__":
             model.save('./model_save/Capsule_Enhanced/Capsule_epochs_%d.h5' % i)
         else:
             model.save('./model_save/Capsule_No_Enhanced/Capsule_epochs_%d.h5' % i)
-
-
         y = model.predict(fact_test[:])
         print('第%s次迭代测试结果如下：' % i)
         #获取测试集结果
