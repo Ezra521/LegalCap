@@ -3,10 +3,8 @@ import time
 import numpy as np
 import pandas as pd
 from keras.models import Model
-from keras.backend import concatenate
-# from keras.layers import Input,Embedding,Dense,Dropout,Convolution1D,MaxPool1D,Flatten
 from get_evaluate import get_evaluate
-from keras.layers import Conv1D, BatchNormalization, Activation, GlobalMaxPool1D,Embedding,Input,GlobalAveragePooling1D,Dense
+from keras.layers import Embedding,Input,GlobalAveragePooling1D,Dense
 
 # os.environ["CUDA_VISIBLE_DEVICES"] = "1"
 print('start', time.strftime('%Y-%m-%d %H:%M:%S', time.localtime()))
@@ -62,7 +60,6 @@ if __name__ == "__main__":
     model = get_model()
     for i in range(n_start, n_end):
         model.fit(x=fact_train, y=labels_train, batch_size=batch_size,validation_data=(fact_valid,labels_valid), epochs=1, verbose=1)
-        # model.fit(x=fact_test, y=labels_test, batch_size=batch_size, epochs=1, verbose=1)
         if isEnhanced:
             model.save('./model_save/FastText_Enhanced/FastText_epochs_%d.h5' % i)
         else:
