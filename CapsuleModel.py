@@ -57,9 +57,9 @@ def get_model():
     # x = Capsule(num_capsule=Num_capsule, dim_capsule=Dim_capsule, routings=Routings, share_weights=True)(x)
     x = Capsule(Num_capsule, Dim_capsule, Routings, True)(x)
     x = Flatten()(x)
-    x = Dropout(dropout_p)(x)
-    x = Dense(500, activation='sigmoid')(x)
-    x = Dense(300, activation='sigmoid')(x)
+    # x = Dropout(dropout_p)(x)
+    # x = Dense(500, activation='sigmoid')(x)
+    # x = Dense(300, activation='sigmoid')(x)
     output = Dense(202, activation='sigmoid')(x)
     model = Model(inputs=data_input, outputs=output)
     model.compile(
