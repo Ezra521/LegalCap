@@ -11,7 +11,7 @@ from get_evaluate import get_evaluate
 # os.environ["CUDA_VISIBLE_DEVICES"] = "1"
 print('start', time.strftime('%Y-%m-%d %H:%M:%S', time.localtime()))
 
-isEnhanced = True
+isEnhanced = False
 
 num_words = 80000 #字典的个数
 maxlen = 400 #每一个输入样本的长度
@@ -82,6 +82,9 @@ if __name__ == "__main__":
 
     df =pd.DataFrame(result_list,columns=["accu", "pre_micro", "recall_micro", "f1_micro","pre_macro","recall_macro","f1_macro"])
     nowtime = time.strftime("%Y%m%d%H%M%S", time.localtime())
-    df.to_csv("./model_save/result_csv/LSTM"+ nowtime + ".csv", index=True, encoding="utf_8_sig", mode="a", header=True)
+    if isEnhanced:
+        df.to_csv("./model_save/result_csv/enhanced_LSTM"+ nowtime + ".csv", index=True, encoding="utf_8_sig", mode="a", header=True)
+    else:
+        df.to_csv("./model_save/result_csv/no_enhanced_LSTM"+ nowtime + ".csv", index=True, encoding="utf_8_sig", mode="a", header=True)
     print('end', time.strftime('%Y-%m-%d %H:%M:%S', time.localtime()))
     print('###################################################################################################################\n')

@@ -3,12 +3,8 @@ import time
 import numpy as np
 import pandas as pd
 from keras.models import Model
-from sklearn.model_selection import train_test_split
 from keras.layers import GRU, Bidirectional,Flatten,SpatialDropout1D,Input,Embedding,Dense,Dropout
 from get_evaluate import get_evaluate
-
-
-# from capsule_layer import Capsule
 from Capsule_Keras import Capsule
 
 
@@ -95,6 +91,9 @@ if __name__ == "__main__":
 
     df =pd.DataFrame(result_list,columns=["accu", "pre_micro", "recall_micro", "f1_micro","pre_macro","recall_macro","f1_macro"])
     nowtime = time.strftime("%Y%m%d%H%M%S", time.localtime())
-    df.to_csv("./model_save/result_csv/Capsule"+ nowtime + ".csv", index=True, encoding="utf_8_sig", mode="a", header=True)
+    if isEnhanced:
+        df.to_csv("./model_save/result_csv/enhanced_Capsule"+ nowtime + ".csv", index=True, encoding="utf_8_sig", mode="a", header=True)
+    else:
+        df.to_csv("./model_save/result_csv/no_enhanced_Capsule"+ nowtime + ".csv", index=True, encoding="utf_8_sig", mode="a", header=True)
     print('end', time.strftime('%Y-%m-%d %H:%M:%S', time.localtime()))
     print('###################################################################################################################\n')
