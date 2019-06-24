@@ -65,9 +65,9 @@ if __name__ == "__main__":
         model.fit(x=fact_train, y=labels_train, batch_size=batch_size,validation_data=(fact_valid,labels_valid), epochs=1, verbose=1)
         # model.fit(x=fact_test, y=labels_test, batch_size=batch_size, epochs=1, verbose=1)
         if isEnhanced:
-            model.save('./model_save/TextCNN_Enhanced/FastText_epochs_%d.h5' % i)
+            model.save('./model_save/FastText_Enhanced/FastText_epochs_%d.h5' % i)
         else:
-            model.save('./model_save/TextCNN_No_Enhanced/FastText_epochs_%d.h5' % i)
+            model.save('./model_save/FastText_No_Enhanced/FastText_epochs_%d.h5' % i)
         y = model.predict(fact_test[:])
         print('第%s次迭代测试结果如下：' % i)
         #获取测试集结果

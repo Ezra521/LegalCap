@@ -3,10 +3,8 @@ import time
 import numpy as np
 import pandas as pd
 from keras.models import Model
-from keras.backend import concatenate
-# from keras.layers import Input,Embedding,Dense,Dropout,Convolution1D,MaxPool1D,Flatten
 from get_evaluate import get_evaluate
-from keras.layers import Conv1D, BatchNormalization, Activation, GlobalMaxPool1D,Embedding,Input,Dense,Concatenate, Dropout
+from keras.layers import Conv1D,Embedding,Input,Dense,Concatenate, GlobalMaxPooling1D
 
 # os.environ["CUDA_VISIBLE_DEVICES"] = "1"
 print('start', time.strftime('%Y-%m-%d %H:%M:%S', time.localtime()))
@@ -40,16 +38,6 @@ labels_test =np.load('./data_preprocessing/data_deal/data_model_use/labels/data_
 fact_valid =np.load('./data_preprocessing/data_deal/data_model_use/fact/data_valid_fact_pad_seq_80000_400.npy')
 labels_valid =np.load('./data_preprocessing/data_deal/data_model_use/labels/data_valid_labels_accusation.npy')
 
-def textcnn_one(word_vec=None, kernel_size=1, filters=512):
-    x = word_vec
-    x = Conv1D(filters=filters, kernel_size=[kernel_size], strides=1, padding='same')(x)
-    x = BatchNormalization()(x)
-    x = Activation(activation='relu')(x)
-    x = Conv1D(filters=filters, kernel_size=[kernel_size], strides=1, padding='same')(x)
-    x = BatchNormalization()(x)
-    x = Activation(activation='relu')(x)
-    x = GlobalMaxPool1D()(x)
-
 def get_model():
     data_input = Input(shape=[fact_train.shape[1]])
     word_vec = Embedding(input_dim=num_words + 1,
@@ -57,8 +45,13 @@ def get_model():
                          output_dim=DIM,
                          mask_zero=0,
                          name='Embedding')(data_input)
-
-
+    convs = []
+    for kernel_size in [3, 4, 5]:
+        c = Conv1D(128, kernel_size, activation='relu')(word_vec)
+        c = GlobalMaxPooling1D()(c)
+        convs.append(c)
+    x = Concatenate()(convs)
+    x = Dense(202, activation="softmax")(x)
     model = Model(inputs=data_input, outputs=x)
     model.compile(loss='binary_crossentropy',
                   optimizer='adam',
