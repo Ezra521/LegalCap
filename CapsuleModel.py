@@ -73,7 +73,6 @@ def get_model():
 if __name__ == "__main__":
     model = get_model()
     for i in range(n_start, n_end):
-        # model.fit(x=fact_train, y=labels_train, batch_size=batch_size, epochs=1, verbose=1)
         model.fit(x=fact_train, y=labels_train, batch_size=batch_size, validation_data=(fact_valid, labels_valid),
                   epochs=1, verbose=1)
         if isEnhanced:
