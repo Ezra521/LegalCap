@@ -3,10 +3,10 @@ import numpy as np
 from get_evaluate import get_evaluate
 import pandas as pd
 result_list=[]
-fact_test =np.load('./data_enhanced/one_label_data/fact/54_私分国有资产_data.npy')
-labels_test =np.load('./data_enhanced/one_label_data/label/54_私分国有资产_label.npy')
+fact_test =np.load('./data_enhanced/one_label_data/fact/4274_走私、贩卖、运输、制造毒品_data.npy')
+labels_test =np.load('./data_enhanced/one_label_data/label/4274_走私、贩卖、运输、制造毒品_label.npy')
 
-model = load_model('./model_save/FastText_No_Enhanced/FastText_epochs_10.h5')
+model = load_model('./model_save/CNN_No_Enhanced/CNN_epochs_20.h5')
 
 y = model.predict(fact_test[:])
 rs = get_evaluate(y_pred=y, y_true=labels_test, type="top")
