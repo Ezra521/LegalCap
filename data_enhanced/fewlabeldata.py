@@ -46,11 +46,11 @@ accu_num = {}
 for i in accusation_set:
     accu_num[i] = class_name.count(i)
     class_index_i = class_index_array[class_name_array == i]
-    np.save('./all_accu_num/%s_%d.npy'%(i,accu_num[i]),class_index_i)
+    np.save('./all_accu_num/%d_%s.npy'%(accu_num[i],i),class_index_i)
 
 
-print(accu_num)
-
-a = sorted(accu_num.items(), key=lambda x: x[1], reverse=True)
-for i in a:
-    print(i)
+# print(accu_num)
+#
+# a = sorted(accu_num.items(), key=lambda x: x[1], reverse=True)
+# for i in a:
+#     print(i)
