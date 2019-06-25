@@ -18,7 +18,7 @@ def show_datanum_distribution():
 
 # show_datanum_distribution()
 
-original_dataname = "data_train"
+original_dataname = "test"
 data_transform = data_transform()
 
 data_transform.read_data(path="../data_preprocessing/data_original/"+ original_dataname +".json")
