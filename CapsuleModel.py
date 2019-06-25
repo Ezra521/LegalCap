@@ -21,7 +21,7 @@ gru_len = 128
 Routings = 4
 Num_capsule = 10
 Dim_capsule = 18
-dropout_p = 0.5
+dropout_p = 0.2
 rate_drop_dense = 0.1
 
 n_start = 1
