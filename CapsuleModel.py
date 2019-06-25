@@ -55,7 +55,7 @@ def get_model():
     x = SpatialDropout1D(rate_drop_dense)(word_vec)
     x = Bidirectional(GRU(gru_len, activation='relu', dropout=dropout_p, recurrent_dropout=dropout_p, return_sequences=True))(x)
     # x = Capsule(num_capsule=Num_capsule, dim_capsule=Dim_capsule, routings=Routings, share_weights=True)(x)
-    x = Capsule(Num_capsule, Dim_capsule, Routings, True)(x)
+    x = Capsule(num_capsule=Num_capsule, dim_capsule=Dim_capsule, routings=Routings )(x)
     x = Flatten()(x)
     # x = Dropout(dropout_p)(x)
     # x = Dense(500, activation='sigmoid')(x)

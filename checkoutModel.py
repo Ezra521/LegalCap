@@ -2,11 +2,23 @@ from keras.models import load_model
 import numpy as np
 from get_evaluate import get_evaluate
 import pandas as pd
+from Capsule_Keras import Capsule
+
+
+Routings = 4
+Num_capsule = 10
+Dim_capsule = 18
+
+Caps = Capsule(Num_capsule, Dim_capsule, Routings, True)
+
 result_list=[]
+#data need to test
 fact_test =np.load('./data_enhanced/one_label_data/fact/4274_走私、贩卖、运输、制造毒品_data.npy')
 labels_test =np.load('./data_enhanced/one_label_data/label/4274_走私、贩卖、运输、制造毒品_label.npy')
 
-model = load_model('./model_save/CNN_No_Enhanced/CNN_epochs_20.h5')
+
+model = load_model('./model_save/Capsule_No_Enhanced/Capsule_epochs_1.h5', custom_objects={'Capsule': Caps})
+# model = load_model('./model_save/CNN_No_Enhanced/CNN_epochs_20.h5')
 
 y = model.predict(fact_test[:])
 rs = get_evaluate(y_pred=y, y_true=labels_test, type="top")
