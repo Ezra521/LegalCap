@@ -15,5 +15,5 @@ for root,dirs,files in os.walk("./all_accu_num"):
         index = np.load(os.path.join(root,i))
         x = fact[index]
         y = label[index]
-        np.save("./one_label_data/fact/"+i+"_data.npy", x)
-        np.save("./one_label_data/label/"+i+"_label.npy",y)
+        np.save("./one_label_data/fact/"+i.split(".")[0]+"_data.npy", x)
+        np.save("./one_label_data/label/"+i.split(".")[0]+"_label.npy",y)
