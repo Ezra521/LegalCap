@@ -34,13 +34,15 @@ clase_num_index = {i:[] for i in range(1,14)}
 for n, i in enumerate(datalabel):
     clase_num_index[len(i)].append(n)
 
+
 for i in clase_num_index:
     print(clase_num_index[i])
     if i >1 :
         np.save("./multi_label_data_index/%d_num_index.npy"%i, clase_num_index[i])
 
 
-# multinum = {key:len(clase_num_index[key]) for key in clase_num_index}
+multinum = {key:len(clase_num_index[key]) for key in clase_num_index}
+print(multinum)
 # df =pd.DataFrame(multinum)
 # df.to_csv("multilabelcount.csv",index=False, encoding="utf_8_sig",header=True)
 # np.save("./multi_label_data_index/clase_num_index_dict.npy",clase_num_index)
