@@ -46,7 +46,7 @@ accu_num = {}
 for i in accusation_set:
     accu_num[i] = class_name.count(i)
     class_index_i = class_index_array[class_name_array == i]
-    np.save('./all_accu_num_index/%d_%s.npy'%(accu_num[i],i),class_index_i)
+    np.save('./one_label_data_index/%d_%s.npy'%(accu_num[i],i),class_index_i)
 
 
 # print(accu_num)
