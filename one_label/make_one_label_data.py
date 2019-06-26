@@ -9,7 +9,7 @@ label = np.load('../data_preprocessing/data_deal/data_model_use/labels/data_trai
 # np.save("./one_label_data/2_徇私舞弊不征、少征税款.npy",x)
 # np.save('./one_label_data/2_徇私舞弊不征、少征税款_label.npy',y)
 # os.walk()
-for root,dirs,files in os.walk("./all_accu_num"):
+for root,dirs,files in os.walk("./one_label_data_index"):
     print(root,dirs,files)
     for i in files:
         index = np.load(os.path.join(root,i))
