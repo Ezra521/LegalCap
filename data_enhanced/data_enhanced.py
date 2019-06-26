@@ -16,7 +16,7 @@ def show_datanum_distribution():
         print('罪名数=%d的有%d个' % (i, (x == i).sum()))
         #一个案件共有几个罪名的统计  列出来
 
-# show_datanum_distribution()
+show_datanum_distribution()
 
 original_dataname = "test"
 data_transform = data_transform()
