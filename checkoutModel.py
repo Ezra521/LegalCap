@@ -9,14 +9,14 @@ from Capsule_Keras import Capsule
 result_list=[]
 #data need to test
 
-fact_test =np.load('./multi_label/multi_label_data/fact/3_num_index_data.npy')
-labels_test =np.load('./multi_label/multi_label_data/label/3_num_index_label.npy')
+fact_test =np.load('./multi_label/multi_label_data/fact/2_num_index_data.npy')
+labels_test =np.load('./multi_label/multi_label_data/label/2_num_index_label.npy')
 
 # fact_test =np.load('./one_label/one_label_data/fact/8_强迫他人吸毒_data.npy')
 # labels_test =np.load('./one_label/one_label_data/label/8_强迫他人吸毒_label.npy')
 
 
-model = load_model('./model_save/Capsule_No_Enhanced/Capsule_epochs_50.h5', custom_objects={'Capsule': Capsule})
+model = load_model('./model_save/Capsule_Enhanced/Capsule_epochs_16.h5', custom_objects={'Capsule': Capsule})
 # model = load_model('./model_save/CNN_No_Enhanced/CNN_epochs_20.h5')
 y = model.predict(fact_test[:])
 
