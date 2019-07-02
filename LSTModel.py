@@ -8,7 +8,7 @@ from get_evaluate import get_evaluate
 
 print('start', time.strftime('%Y-%m-%d %H:%M:%S', time.localtime()))
 
-isEnhanced = False
+isEnhanced = True
 
 num_words = 80000 #字典的个数
 maxlen = 400 #每一个输入样本的长度
