@@ -8,7 +8,7 @@ from get_evaluate import get_evaluate
 
 print('start', time.strftime('%Y-%m-%d %H:%M:%S', time.localtime()))
 
-isEnhanced = True
+isEnhanced = False
 
 num_words = 80000 #字典的个数
 maxlen = 400 #每一个输入样本的长度
@@ -19,7 +19,7 @@ batch_size = 256
 
 
 n_start = 1
-n_end = 31
+n_end = 51
 result_list=[]
 
 if isEnhanced:
@@ -46,7 +46,7 @@ def get_model():
                          mask_zero=0,
                          name='Embedding')(data_input)
     x = word_vec
-    x = LSTM(512)(x)
+    x = LSTM(300)(x)
     x = Dense(1000,name="FC1")(x)
     x = Activation("relu")(x)
     x = Dropout(0.5)(x)

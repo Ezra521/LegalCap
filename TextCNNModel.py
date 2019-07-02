@@ -9,7 +9,7 @@ from keras.layers import Conv1D,Embedding,Input,Dense,Concatenate, GlobalMaxPool
 # os.environ["CUDA_VISIBLE_DEVICES"] = "1"
 print('start', time.strftime('%Y-%m-%d %H:%M:%S', time.localtime()))
 
-isEnhanced = True
+isEnhanced = False
 
 num_words = 80000 #字典的个数
 maxlen = 400 #每一个输入样本的长度
@@ -47,7 +47,7 @@ def get_model():
                          name='Embedding')(data_input)
     convs = []
     for kernel_size in [3, 4, 5]:
-        c = Conv1D(128, kernel_size, activation='relu')(word_vec)
+        c = Conv1D(64, kernel_size, activation='relu')(word_vec)
         c = GlobalMaxPooling1D()(c)
         convs.append(c)
     x = Concatenate()(convs)
