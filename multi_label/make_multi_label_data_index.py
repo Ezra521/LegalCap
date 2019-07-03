@@ -8,7 +8,7 @@ from data_preprocessing.data_transform import  data_transform
 
 def show_datanum_distribution():
     # 罪名数量分布
-    labels = np.load('../data_preprocessing/data_deal/data_model_use/labels/data_all_labels_accusation.npy')
+    labels = np.load('../data_preprocessing/data_deal/data_model_use/labels/data_test_labels_accusation.npy')
     x = labels.sum(axis=1)
     for i in range(int(x.max()) + 1):
         # s1 = (x==i)
@@ -18,7 +18,7 @@ def show_datanum_distribution():
 
 # show_datanum_distribution()
 
-original_dataname = "data_train"
+original_dataname = "data_test"
 data_transform = data_transform()
 
 data_transform.read_data(path="../data_preprocessing/data_original/"+ original_dataname +".json")
@@ -37,8 +37,8 @@ for n, i in enumerate(datalabel):
 
 for i in clase_num_index:
     print(clase_num_index[i])
-    if i >1 :
-        np.save("./multi_label_data_index/%d_num_index.npy"%i, clase_num_index[i])
+    if i >0 :
+        np.save("./multi_label_data_index/%d_num_index_test.npy"%i, clase_num_index[i])
 
 
 multinum = {key:len(clase_num_index[key]) for key in clase_num_index}

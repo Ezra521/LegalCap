@@ -67,7 +67,7 @@ if __name__ == "__main__":
         y = model.predict(fact_test[:])
         print('第%s次迭代测试结果如下：' % i)
         #获取测试集结果
-        rs = get_evaluate(y_pred=y, y_true=labels_test, type="top")
+        rs = get_evaluate(y_pred=y, y_true=labels_test, type="both")
         result_list.append(rs.get_all_evaluate())
         print(pd.DataFrame(result_list, columns=["accu", "pre_micro", "recall_micro", "f1_micro","pre_macro","recall_macro","f1_macro"]).to_string(index=True))
 
