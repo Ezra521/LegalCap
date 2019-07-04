@@ -70,7 +70,7 @@ def getresult(y_pred,test_label):
     return (f1_micro,f1_macro)
 
 if __name__ == "__main__":
-    saveModel()
+    # saveModel()
     if isEnhanced:
         tfidf = joblib.load('./model_save/TFIDFSVM_Enhanced/tfidf_no_enhanced.model')
         svm = joblib.load('./model_save/TFIDFSVM_Enhanced/svm_no_enhanced.model')

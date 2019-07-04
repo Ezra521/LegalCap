@@ -19,7 +19,7 @@ batch_size = 256
 
 
 n_start = 1
-n_end = 51
+n_end = 71
 result_list=[]
 
 if isEnhanced:

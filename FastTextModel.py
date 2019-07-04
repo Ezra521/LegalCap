@@ -9,7 +9,7 @@ from keras.layers import Embedding,Input,GlobalAveragePooling1D,Dense
 # os.environ["CUDA_VISIBLE_DEVICES"] = "1"
 print('start', time.strftime('%Y-%m-%d %H:%M:%S', time.localtime()))
 
-isEnhanced = True
+isEnhanced = False
 
 num_words = 80000 #字典的个数
 maxlen = 400 #每一个输入样本的长度
@@ -20,7 +20,7 @@ DIM = 300  #词向量的维度
 batch_size = 256
 
 n_start = 1
-n_end = 31
+n_end = 51
 result_list=[]
 
 if isEnhanced:
