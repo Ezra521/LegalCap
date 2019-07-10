@@ -3,7 +3,7 @@ import numpy as np
 import pandas as pd
 from keras.models import Model
 from keras.layers.recurrent import LSTM
-from keras.layers import Input,Embedding,Dense,Dropout,Activation
+from keras.layers import Input,Embedding,Dense,Dropout,Activation,CuDNNLSTM
 from get_evaluate import get_evaluate
 
 print('start', time.strftime('%Y-%m-%d %H:%M:%S', time.localtime()))
@@ -46,7 +46,7 @@ def get_model():
                          mask_zero=0,
                          name='Embedding')(data_input)
     x = word_vec
-    x = LSTM(300)(x)
+    x = CuDNNLSTM(300)(x)
     x = Dense(1000,name="FC1")(x)
     x = Activation("relu")(x)
     x = Dropout(0.5)(x)

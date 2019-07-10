@@ -3,7 +3,7 @@ import time
 import numpy as np
 import pandas as pd
 from keras.models import Model
-from keras.layers import GRU, Bidirectional,Flatten,SpatialDropout1D,Input,Embedding,Dense,Dropout
+from keras.layers import GRU, Bidirectional,Flatten,SpatialDropout1D,Input,Embedding,Dense,Dropout,CuDNNGRU
 from get_evaluate import get_evaluate
 from Capsule_Keras import Capsule
 
