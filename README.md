@@ -1,5 +1,5 @@
 ## LegalCap project
-### author: ezra 
+### author: Ezra 
 ### data 20190619
 ****
 
